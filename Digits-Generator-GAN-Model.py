@@ -23,7 +23,7 @@ transform = transforms.Compose(
 train_set = torchvision.datasets.MNIST(
     root=".", train=True, download=True, transform=transform
 )
-# For a basic GAN model a batch size of either 32 or 64 is preferred
+# For a basic GAN model a batch size of either 32 or 64 is the preferred default
 batch_size = 32
 train_loader = torch.utils.data.DataLoader(
     train_set, batch_size=batch_size, shuffle=True
@@ -87,8 +87,11 @@ generator = Generator().to(device=device)
 
 
 # Define training parameters, it gets more accurate with more epochs but takes longer to train
+# Learning rate, a good default is 0.0001
 lr = 0.0001
+# Number of times the data will be trained, a good starting point is 50 - 100
 num_epochs = 10
+# Calculate loss
 loss_function = nn.BCELoss()
 
 optimizer_discriminator = torch.optim.Adam(discriminator.parameters(), lr=lr)
